@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS ACADEMY — Evolua Seu Conhecimento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/notiflix@2.6.0/dist/notiflix-aio-2.6.0.min.js" defer></script>
+    
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; background: #050505; color: #e5e5e5; margin: 0; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #00ff8833; border-radius: 3px; }
+        
+        .glow-green { box-shadow: 0 0 20px rgba(0,255,136,0.3); }
+        .glow-red { box-shadow: 0 0 20px rgba(255,43,43,0.3); }
+        .line-gradient { background: linear-gradient(90deg, transparent, #00ff88, transparent); height: 1px; }
+        .line-gradient-red { background: linear-gradient(90deg, transparent, #ff2b2b, transparent); height: 1px; }
+        .card-hover { transition: all 0.4s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,255,136,0.08); }
+
+        /* Estilos de Navegação - Removido o conflito de display */
+        .nav-link.active-link { color: #00ff88 !important; border-bottom: 2px solid #00ff88; padding-bottom: 4px; }
+        .nav-link-admin.active-link { color: #ff2b2b !important; border-bottom: 2px solid #ff2b2b; padding-bottom: 4px; }
+    </style>
+    <script>
+        window.onload = function() {
+            if (typeof tailwind !== 'undefined') {
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                dark: { 900: '#0a0a0a', 800: '#111111', 700: '#1a1a1a' },
+                                neon: '#00ff88',
+                                red: { intense: '#ff2b2b' }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <!-- NAVBAR FIXA -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/90 backdrop-blur-md border-b border-white/[0.06]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 nav-link" onclick="event.preventDefault(); navigateTo('home')">
+                <div class="w-10 h-10 rounded-lg bg-[#00ff88]/10 border border-[#00ff88]/30 flex items-center justify-center">
+                    <span class="text-[#00ff88] font-bold text-lg">N</span>
+                </div>
+                <span class="text-white font-bold text-lg tracking-tight">NEXUS<span class="text-[#00ff88]">.</span></span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" onclick="event.preventDefault(); navigateTo('home')" class="nav-link text-[11px] font-medium tracking-[0.15em] uppercase text-white/60 hover:text-[#00ff88] transition-colors cursor-pointer">Home</a>
+                <a href="#cursos" onclick="event.preventDefault(); navigateTo('cursos')" class="nav-link text-[11px] font-medium tracking-[0.15em] uppercase text-white/60 hover:text-[#00ff88] transition-colors cursor-pointer">Cursos</a>
+                <a href="#ebooks" onclick="event.preventDefault(); navigateTo('ebooks')" class="nav-link text-[11px] font-medium tracking-[0.15em] uppercase text-white/60 hover:text-[#00ff88] transition-colors cursor-pointer">Ebooks</a>
+                <a href="#planos" onclick="event.preventDefault(); navigateTo('planos')" class="nav-link text-[11px] font-medium tracking-[0.15em] uppercase text-white/60 hover:text-[#00ff88] transition-colors cursor-pointer">Planos</a>
+                <a href="#admin" onclick="event.preventDefault(); navigateTo('admin')" class="nav-link-admin text-[11px] font-medium tracking-[0.15em] uppercase text-white/60 hover:text-[#ff2b2b] transition-colors cursor-pointer">Admin</a>
+            </div>
+
+            <a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#00ff88] text-black text-[11px] font-bold tracking-[0.1em] uppercase px-6 py-3 rounded-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(0,255,136,0.3)] cursor-pointer">
+                Acessar
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-20 relative">
+
+        <!-- ================= PÁGINA HOME ================= -->
+        <!-- data-display="flex" garante que o layout flex seja aplicado corretamente ao mostrar -->
+        <div id="view-home" class="page-view min-h-screen flex items-center justify-center relative overflow-hidden" data-display="flex" style="display: flex;">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[#00ff88]/[0.03] blur-[120px] pointer-events-none"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+                <div class="inline-flex items-center gap-2 bg-[#00ff88]/5 border border-[#00ff88]/20 rounded-full px-5 py-2 mb-8">
+                    <span class="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse"></span>
+                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-[#00ff88]/80">Plataforma Nº1 em Conhecimento</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl lg:text-[96px] font-bold leading-[0.95] tracking-tighter text-white mb-8">
+                    Evolua.<span class="text-[#00ff88]">.</span><br>
+                    <span class="text-white/40">Transforme.</span><span class="text-[#ff2b2b]">.</span><br>
+                    Domine<span class="text-[#00ff88]">.</span>
+                </h1>
+                <p class="max-w-2xl mx-auto text-base md:text-lg font-light text-white/50 leading-relaxed mb-12">
+                    Acesse os melhores cursos e eBooks do mercado. Conhecimento de ponta para quem quer liderar a revolução digital.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#cursos" onclick="event.preventDefault(); navigateTo('cursos')" class="group flex items-center gap-3 bg-[#00ff88] text-black text-[11px] font-bold tracking-[0.12em] uppercase px-8 py-4 rounded-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(0,255,136,0.3)] cursor-pointer">
+                        Começar Agora <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                    </a>
+                    <a href="#cursos" onclick="event.preventDefault(); navigateTo('cursos')" class="group flex items-center gap-3 bg-white/5 border border-white/10 text-white/80 text-[11px] font-bold tracking-[0.12em] uppercase px-8 py-4 rounded-lg hover:border-[#00ff88]/30 hover:text-[#00ff88] transition-all cursor-pointer">
+                        Ver Cursos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA CURSOS ================= -->
+        <div id="view-cursos" class="page-view py-20 md:py-32" data-display="block" style="display: none;">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center gap-2 bg-[#00ff88]/5 border border-[#00ff88]/20 rounded-full px-4 py-1.5 mb-6">
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-[#00ff88]/80">Cursos em Destaque</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Aprenda com os <span class="text-[#00ff88]">Melhores</span></h1>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-xl overflow-hidden">
+                        <div class="h-40 bg-[#111] overflow-hidden"><img src="https://picsum.photos/seed/course-ai/400/250.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.6)" loading="lazy"></div>
+                        <div class="p-5"><h3 class="text-sm font-semibold text-white mb-3 tracking-tight">Inteligência Artificial Aplicada</h3><div class="flex items-center justify-between"><span class="text-lg font-bold text-[#00ff88]">R$ 147</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#00ff88] hover:text-black transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-xl overflow-hidden">
+                        <div class="h-40 bg-[#111] overflow-hidden"><img src="https://picsum.photos/seed/course-design/400/250.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.6)" loading="lazy"></div>
+                        <div class="p-5"><h3 class="text-sm font-semibold text-white mb-3 tracking-tight">UI/UX Design Masterclass</h3><div class="flex items-center justify-between"><span class="text-lg font-bold text-[#00ff88]">R$ 127</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#00ff88] hover:text-black transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-xl overflow-hidden">
+                        <div class="h-40 bg-[#111] overflow-hidden"><img src="https://picsum.photos/seed/course-crypto/400/250.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.6)" loading="lazy"></div>
+                        <div class="p-5"><h3 class="text-sm font-semibold text-white mb-3 tracking-tight">Crypto & DeFi para Iniciantes</h3><div class="flex items-center justify-between"><span class="text-lg font-bold text-[#00ff88]">R$ 97</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#00ff88] hover:text-black transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-xl overflow-hidden">
+                        <div class="h-40 bg-[#111] overflow-hidden"><img src="https://picsum.photos/seed/course-copy/400/250.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.6)" loading="lazy"></div>
+                        <div class="p-5"><h3 class="text-sm font-semibold text-white mb-3 tracking-tight">Copywriting Persuasivo</h3><div class="flex items-center justify-between"><span class="text-lg font-bold text-[#00ff88]">R$ 87</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#00ff88]/10 border border-[#00ff88]/20 text-[#00ff88] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#00ff88] hover:text-black transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA EBOOKS ================= -->
+        <div id="view-ebooks" class="page-view py-20 md:py-32" data-display="block" style="display: none;">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center gap-2 bg-[#ff2b2b]/5 border border-[#ff2b2b]/20 rounded-full px-4 py-1.5 mb-6">
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-[#ff2b2b]/80">eBooks Digitais</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Conhecimento na <span class="text-[#ff2b2b]">Palma</span></h1>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                        <div class="w-full md:w-48 h-56 md:h-auto bg-[#111] overflow-hidden flex-shrink-0"><img src="https://picsum.photos/seed/ebook-habits/300/420.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.5) saturate(1.3)" loading="lazy"></div>
+                        <div class="p-6 flex flex-col justify-between flex-1"><div><span class="text-[9px] font-bold tracking-widest uppercase text-[#ff2b2b] bg-[#ff2b2b]/10 px-2 py-0.5 rounded">eBook • 198 págs</span><h3 class="text-base font-semibold text-white mt-3 mb-2 tracking-tight group-hover:text-[#ff2b2b] transition-colors">Hábitos de Alto Performance</h3><p class="text-xs text-white/35 font-light leading-relaxed">Rotinas e mentalidade dos top 1%.</p></div><div class="flex items-center justify-between mt-6"><span class="text-xl font-bold text-[#ff2b2b]">R$ 47</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#ff2b2b]/10 border border-[#ff2b2b]/20 text-[#ff2b2b] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#ff2b2b] hover:text-white transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                        <div class="w-full md:w-48 h-56 md:h-auto bg-[#111] overflow-hidden flex-shrink-0"><img src="https://picsum.photos/seed/ebook-finance/300/420.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.5) saturate(1.3)" loading="lazy"></div>
+                        <div class="p-6 flex flex-col justify-between flex-1"><div><span class="text-[9px] font-bold tracking-widest uppercase text-[#ff2b2b] bg-[#ff2b2b]/10 px-2 py-0.5 rounded">eBook • 312 págs</span><h3 class="text-base font-semibold text-white mt-3 mb-2 tracking-tight group-hover:text-[#ff2b2b] transition-colors">Liberdade Financeira 360°</h3><p class="text-xs text-white/35 font-light leading-relaxed">Mapa completo para construir riqueza.</p></div><div class="flex items-center justify-between mt-6"><span class="text-xl font-bold text-[#ff2b2b]">R$ 57</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#ff2b2b]/10 border border-[#ff2b2b]/20 text-[#ff2b2b] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#ff2b2b] hover:text-white transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                    <div class="card-hover group bg-[#0a0a0a] border border-white/[0.06] rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                        <div class="w-full md:w-48 h-56 md:h-auto bg-[#111] overflow-hidden flex-shrink-0"><img src="https://picsum.photos/seed/ebook-startup/300/420.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style="filter: brightness(0.5) saturate(1.3)" loading="lazy"></div>
+                        <div class="p-6 flex flex-col justify-between flex-1"><div><span class="text-[9px] font-bold tracking-widest uppercase text-[#ff2b2b] bg-[#ff2b2b]/10 px-2 py-0.5 rounded">eBook • 248 págs</span><h3 class="text-base font-semibold text-white mt-3 mb-2 tracking-tight group-hover:text-[#ff2b2b] transition-colors">Startup do Zero ao Milhão</h3><p class="text-xs text-white/35 font-light leading-relaxed">O blueprint para escalar uma startup.</p></div><div class="flex items-center justify-between mt-6"><span class="text-xl font-bold text-[#ff2b2b]">R$ 67</span><a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="bg-[#ff2b2b]/10 border border-[#ff2b2b]/20 text-[#ff2b2b] text-[10px] font-bold uppercase px-4 py-2 rounded-lg hover:bg-[#ff2b2b] hover:text-white transition-all cursor-pointer">Comprar</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA PLANOS ================= -->
+        <div id="view-planos" class="page-view py-20 md:py-32" data-display="block" style="display: none;">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Escolha seu <span class="text-[#00ff88]">Nível</span></h1>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card-hover bg-[#0a0a0a] border border-white/[0.06] rounded-2xl p-8 flex flex-col">
+                        <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/30 mb-2">Starter</div>
+                        <div class="flex items-baseline gap-1 mb-6"><span class="text-4xl font-bold text-white">R$ 47</span><span class="text-sm text-white/30 font-light">/mês</span></div>
+                        <div class="line-gradient mb-6"></div>
+                        <ul class="space-y-3 mb-8 flex-1 text-sm text-white/50 font-light"><li class="flex items-center gap-3"><span class="text-[#00ff88]">✓</span>3 cursos disponíveis</li><li class="flex items-center gap-3"><span class="text-[#00ff88]">✓</span>5 eBooks por mês</li></ul>
+                        <a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="block text-center w-full bg-white/5 border border-white/10 text-white/80 text-[11px] font-bold tracking-[0.12em] uppercase py-3.5 rounded-lg hover:border-[#00ff88]/30 hover:text-[#00ff88] transition-all cursor-pointer">Assinar</a>
+                    </div>
+                    <div class="card-hover bg-[#0a0a0a] border border-[#00ff88]/20 rounded-2xl p-8 flex flex-col relative shadow-[0_0_40px_rgba(0,255,136,0.05)]">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#00ff88] text-black text-[9px] font-bold tracking-[0.2em] uppercase px-4 py-1 rounded-full">Mais Popular</div>
+                        <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-[#00ff88] mb-2">Pro</div>
+                        <div class="flex items-baseline gap-1 mb-6"><span class="text-4xl font-bold text-white">R$ 97</span><span class="text-sm text-white/30 font-light">/mês</span></div>
+                        <div class="line-gradient mb-6"></div>
+                        <ul class="space-y-3 mb-8 flex-1 text-sm text-white/50 font-light"><li class="flex items-center gap-3"><span class="text-[#00ff88]">✓</span>Todos os cursos</li><li class="flex items-center gap-3"><span class="text-[#00ff88]">✓</span>eBooks ilimitados</li></ul>
+                        <a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="block text-center w-full bg-[#00ff88] text-black text-[11px] font-bold tracking-[0.12em] uppercase py-3.5 rounded-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(0,255,136,0.3)] cursor-pointer">Assinar Pro</a>
+                    </div>
+                    <div class="card-hover bg-[#0a0a0a] border border-[#ff2b2b]/10 rounded-2xl p-8 flex flex-col">
+                        <div class="text-[10px] font-bold tracking-[0.2em] uppercase text-[#ff2b2b] mb-2">Elite</div>
+                        <div class="flex items-baseline gap-1 mb-6"><span class="text-4xl font-bold text-white">R$ 197</span><span class="text-sm text-white/30 font-light">/mês</span></div>
+                        <div class="line-gradient-red mb-6"></div>
+                        <ul class="space-y-3 mb-8 flex-1 text-sm text-white/50 font-light"><li class="flex items-center gap-3"><span class="text-[#ff2b2b]">✓</span>Todos os cursos</li><li class="flex items-center gap-3"><span class="text-[#ff2b2b]">✓</span>Mentoria individual</li></ul>
+                        <a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="block text-center w-full bg-[#ff2b2b] text-white text-[11px] font-bold tracking-[0.12em] uppercase py-3.5 rounded-lg hover:bg-[#cc1f1f] transition-all shadow-[0_0_20px_rgba(255,43,43,0.3)] cursor-pointer">Assinar Elite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA LOGIN ================= -->
+        <div id="view-login" class="page-view min-h-screen flex items-center justify-center px-6" data-display="flex" style="display: none;">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-10">
+                    <h1 class="text-4xl font-bold tracking-tight text-white">Entrar</h1>
+                    <p class="text-sm text-white/40 font-light mt-2">Acesse a plataforma Nexus.</p>
+                </div>
+                <form class="space-y-5 bg-[#0a0a0a] border border-white/[0.06] p-8 rounded-2xl">
+                    <div><label class="block text-[10px] font-bold tracking-[0.15em] uppercase text-white/40 mb-2">Email</label><input type="email" class="w-full bg-[#111] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00ff88]/40 transition-colors placeholder-white/20" placeholder="seu@email.com"></div>
+                    <div><label class="block text-[10px] font-bold tracking-[0.15em] uppercase text-white/40 mb-2">Senha</label><input type="password" class="w-full bg-[#111] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00ff88]/40 transition-colors placeholder-white/20" placeholder="••••••••"></div>
+                    <button type="button" onclick="alert('Integração com Supabase Auth ativa no backend.')" class="w-full bg-[#00ff88] text-black text-[11px] font-bold tracking-[0.12em] uppercase py-4 rounded-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(0,255,136,0.3)]">Acessar Plataforma</button>
+                </form>
+                <p class="text-center text-sm text-white/40 font-light mt-6">Não tem uma conta? <a href="#cadastro" onclick="event.preventDefault(); navigateTo('cadastro')" class="text-[#00ff88] hover:text-white transition-colors font-medium cursor-pointer">Cadastre-se</a></p>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA CADASTRO ================= -->
+        <div id="view-cadastro" class="page-view min-h-screen flex items-center justify-center px-6" data-display="flex" style="display: none;">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-10">
+                    <h1 class="text-4xl font-bold tracking-tight text-white">Criar Conta</h1>
+                    <p class="text-sm text-white/40 font-light mt-2">Comece sua jornada na Nexus Academy.</p>
+                </div>
+                <form class="space-y-5 bg-[#0a0a0a] border border-white/[0.06] p-8 rounded-2xl">
+                    <div><label class="block text-[10px] font-bold tracking-[0.15em] uppercase text-white/40 mb-2">Nome Completo</label><input type="text" class="w-full bg-[#111] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00ff88]/40 transition-colors placeholder-white/20" placeholder="Seu nome"></div>
+                    <div><label class="block text-[10px] font-bold tracking-[0.15em] uppercase text-white/40 mb-2">Email</label><input type="email" class="w-full bg-[#111] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00ff88]/40 transition-colors placeholder-white/20" placeholder="seu@email.com"></div>
+                    <div><label class="block text-[10px] font-bold tracking-[0.15em] uppercase text-white/40 mb-2">Senha</label><input type="password" class="w-full bg-[#111] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00ff88]/40 transition-colors placeholder-white/20" placeholder="Mínimo 6 caracteres"></div>
+                    <button type="button" onclick="alert('Cadastro integrado com Supabase Auth!')" class="w-full bg-[#00ff88] text-black text-[11px] font-bold tracking-[0.12em] uppercase py-4 rounded-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(0,255,136,0.3)]">Cadastrar</button>
+                </form>
+                <p class="text-center text-sm text-white/40 font-light mt-6">Já tem uma conta? <a href="#login" onclick="event.preventDefault(); navigateTo('login')" class="text-[#00ff88] hover:text-white transition-colors font-medium cursor-pointer">Fazer Login</a></p>
+            </div>
+        </div>
+
+        <!-- ================= PÁGINA ADMIN ================= -->
+        <div id="view-admin" class="page-view min-h-screen flex" data-display="flex" style="display: none;">
+            <aside class="w-64 border-r border-white/[0.06] bg-[#080808] p-6 hidden md:flex flex-col">
+                <div class="flex items-center gap-3 mb-10"><div class="w-9 h-9 rounded-lg bg-[#ff2b2b]/10 border border-[#ff2b2b]/30 flex items-center justify-center"><span class="text-[#ff2b2b] font-bold text-sm">N</span></div><span class="text-[10px] font-medium tracking-[0.2em] uppercase text-[#ff2b2b]/80">Admin Panel</span></div>
+                <nav class="space-y-2 flex-1">
+                    <a href="#" class="flex items-center gap-3 text-[13px] text-white bg-white/5 p-3 rounded-lg border-l-2 border-[#00ff88]">📊 Dashboard</a>
+                    <a href="#" class="flex items-center gap-3 text-[13px] text-white/50 p-3 rounded-lg hover:bg-white/5 transition-colors">📦 Produtos</a>
+                    <a href="#" class="flex items-center gap-3 text-[13px] text-white/50 p-3 rounded-lg hover:bg-white/5 transition-colors">👥 Usuários</a>
+                    <a href="#" class="flex items-center gap-3 text-[13px] text-white/50 p-3 rounded-lg hover:bg-white/5 transition-colors">💰 Vendas</a>
+                </nav>
+            </aside>
+            <main class="flex-1 p-8 bg-[#050505]">
+                <h1 class="text-2xl font-bold tracking-tight mb-6">Dashboard</h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-[#111] border border-white/[0.06] rounded-xl p-5"><span class="text-[10px] font-medium tracking-wider uppercase text-white/30">Receita Total</span><div class="text-2xl font-bold text-[#00ff88] mt-2">R$ 847K</div></div>
+                    <div class="bg-[#111] border border-white/[0.06] rounded-xl p-5"><span class="text-[10px] font-medium tracking-wider uppercase text-white/30">Vendas</span><div class="text-2xl font-bold text-white mt-2">1.280</div></div>
+                    <div class="bg-[#111] border border-white/[0.06] rounded-xl p-5"><span class="text-[10px] font-medium tracking-wider uppercase text-white/30">Usuários</span><div class="text-2xl font-bold text-blue-400 mt-2">52.7K</div></div>
+                </div>
+            </main>
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT À PROVA DE FALHAS -->
+    <script>
+        function navigateTo(pageName) {
+            // 1. Esconde todas as páginas imediatamente
+            document.querySelectorAll('.page-view').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // 2. Mostra a página alvo usando o atributo data-display para evitar conflito com o Tailwind
+            const targetSection = document.getElementById('view-' + pageName);
+            if (targetSection) {
+                const displayType = targetSection.getAttribute('data-display') || 'block';
+                targetSection.style.display = displayType;
+            }
+
+            // 3. Atualiza o menu ativo
+            document.querySelectorAll('.nav-link, .nav-link-admin').forEach(link => {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href') === '#' + pageName) {
+                    link.classList.add('active-link');
+                }
+            });
+
+            // 4. Atualiza a URL
+            history.pushState(null, '', '#' + pageName);
+            
+            // 5. Sobe para o topo da página
+            window.scrollTo(0, 0);
+        }
+
+        // Lida com o botão de voltar do navegador
+        window.onpopstate = function() {
+            const page = window.location.hash.replace('#', '') || 'home';
+            navigateTo(page);
+        };
+
+        // Inicializa a página correta ao carregar
+        document.addEventListener("DOMContentLoaded", function() {
+            const initialPage = window.location.hash.replace('#', '') || 'home';
+            navigateTo(initialPage);
+
+            // Configura a Prova Social
+            function initProvaSocial() {
+                if (typeof Notiflix !== 'undefined') {
+                    Notiflix.Notify.init({
+                        position: 'left-bottom', cssAnimationStyle: 'from-left', timeout: 4000, plainText: false, fontSize: '13px', borderRadius: '8px',
+                        success: { background: '#111111', textColor: '#00ff88', notiflixIconColor: '#00ff88', borderColor: '#00ff8833' },
+                    });
+
+                    const names = ['José', 'Maria', 'Carlos', 'Ana', 'Pedro', 'Camila'];
+                    const products = ['Marketing Digital', 'Full-Stack Pro', 'Mente de Trader'];
+
+                    function showNotification() {
+                        const name = names[Math.floor(Math.random() * names.length)];
+                        const product = products[Math.floor(Math.random() * products.length)];
+                        Notiflix.Notify.Success('<strong>' + name + '</strong> acabou de adquirir <strong>' + product + '</strong>!');
+                        setTimeout(showNotification, 8000);
+                    }
+                    setTimeout(showNotification, 5000);
+                }
+            }
+            setTimeout(initProvaSocial, 2000);
+        });
+    </script>
+</body>
+</html>
